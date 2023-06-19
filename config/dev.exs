@@ -5,20 +5,27 @@ config :conduit, Conduit.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "conduit_readstore_dev",
+  database: "conduit_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
-config :conduit, Conduit.EventStore,
-  column_data_type: "jsonb",
-  serializer: EventStore.JsonbSerializer,
-  types: EventStore.PostgresTypes,
-  database: "conduit_eventstore_dev",
+config :conduit, Conduit.Repo,
+  adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
+  database: "conduit_readstore_dev",
   hostname: "localhost",
-  schema: "public"
+  pool_size: 10
+
+# Configure the event store database
+config :conduit, Conduit.EventStore,
+  serializer: Commanded.Serialization.JsonSerializer,
+  username: "postgres",
+  password: "postgres",
+  database: "conduit_eventstore_dev",
+  hostname: "localhost",
+  pool_size: 10
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -72,12 +79,3 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
-
-# Configure the event store database
-config :eventstore, EventStore.Storage,
-  serializer: Commanded.Serialization.JsonSerializer,
-  username: "postgres",
-  password: "postgres",
-  database: "conduit_eventstore_dev",
-  hostname: "localhost",
-  pool_size: 10

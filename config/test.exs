@@ -30,10 +30,12 @@ config :logger, level: :warn
 config :phoenix, :plug_init_mode, :runtime
 
 # Configure the event store database
-config :eventstore, EventStore.Storage,
+config :conduit, Conduit.EventStore,
   serializer: Commanded.Serialization.JsonSerializer,
   username: "postgres",
   password: "postgres",
   database: "conduit_eventstore_test",
   hostname: "localhost",
+  stacktrace: true,
+  pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10

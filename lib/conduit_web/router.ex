@@ -7,6 +7,8 @@ defmodule ConduitWeb.Router do
 
   scope "/api", ConduitWeb do
     pipe_through :api
+
+    resources "/users", UserController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development
