@@ -6,7 +6,8 @@ defmodule Conduit.Accounts.Aggregates.User do
     :hashed_password
   ]
 
-  alais Conduit.Accounts.Aggregate.User
+  alias Conduit.Accounts.Aggregates.User
+  alias Conduit.Accounts.Commands.RegisterUser
 
   @doc """
   Register a new user
