@@ -24,11 +24,12 @@ defmodule Conduit.Accounts.Aggregates.User do
 
   # state mutators i.e takes the above struct and resultunt event and mutates the aggragate state
   def apply(%User{} = user, %UserRegistered{} = registered) do
-    %User{user |
-      uuid: registered.user_uuid,
-      username: registered.username,
-      email: registered.email,
-      hashed_password: registered.hashed_password
+    %User{
+      user
+      | uuid: registered.user_uuid,
+        username: registered.username,
+        email: registered.email,
+        hashed_password: registered.hashed_password
     }
   end
 end

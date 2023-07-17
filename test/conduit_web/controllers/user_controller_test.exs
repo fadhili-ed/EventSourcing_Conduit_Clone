@@ -42,7 +42,8 @@ defmodule ConduitWeb.UserControllerTest do
     test "should not create user and render errors when username has been taken", %{conn: conn} do
       {:ok, _user} = fixture(:user)
       # attempt to register the same username
-      conn = post(conn, Routes.user_path(conn, :create), user: build(:user, email: "jake2@jake.jake"))
+      conn =
+        post(conn, Routes.user_path(conn, :create), user: build(:user, email: "jake2@jake.jake"))
 
       assert json_response(conn, 422)["errors"] == %{
                "username" => [

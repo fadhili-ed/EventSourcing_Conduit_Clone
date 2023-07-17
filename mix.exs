@@ -50,7 +50,9 @@ defmodule Conduit.MixProject do
       {:eventstore, "~> 1.4"},
       {:ex_machina, "~> 2.0", only: :test},
       {:uuid, "~> 1.1"},
-      {:exconstructor, "~> 1.1"}
+      {:exconstructor, "~> 1.1"},
+      {:poison, "~> 5.0"},
+      {:mix_test_watch, "~> 0.5", only: :dev, runtime: false}
     ]
   end
 

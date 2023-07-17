@@ -8,6 +8,20 @@ defmodule Conduit.Accounts do
 
   alias Conduit.Accounts.User
 
+  alias Conduit.Accounts.Commands.RegisterUser
+  alias Conduit.Router
+
+  def register_user(attrs \\ %{}) do
+    attrs
+    |> IO.inspect(label: "attrs")
+    |> assign_uuid(:user_uuid)
+    |> RegisterUser.new()
+    |> IO.inspect(label: "register_new")
+    |> Router.dispatch() |> IO.inspect(label: "@@@")
+  end
+
+  defp assign_uuid(attrs, identity), do: Map.put(attrs, identity, UUID.uuid4())
+
   @doc """
   Returns the list of users.
 
